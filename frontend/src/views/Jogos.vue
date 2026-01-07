@@ -20,7 +20,7 @@
         <h2>Jogos</h2>
         <ul>
             <li v-for="jogo in jogos" :key="jogo.id">
-                {{ jogo.equipa_casa }} x {{ jogo.equipa_visitante }}
+                {{ jogo.equipa_casa_nome }} x {{ jogo.equipa_visitante_nome }}
             </li>
         </ul>
     </div>

@@ -33,6 +33,8 @@ class JogadorSerializer(serializers.ModelSerializer):
         return value
         
 class JogoSerializer(serializers.ModelSerializer):
+    equipa_casa_nome = serializers.CharField(source='equipa_casa.nome', read_only=True)
+    equipa_visitante_nome = serializers.CharField(source='equipa_visitante.nome', read_only=True)
     class Meta:
         model = Jogo
         fields = '__all__'
