@@ -14,17 +14,17 @@ class LigaSerializer(serializers.ModelSerializer):
 
 class EquipaSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Equipa
+        model = Equipa
         fields = '__all__'
-    
+
     def validate_ano_fundacao(self, value):
         if value < 1850:
-            raise serializers.ValidationError('Ano de fundação inválido.')
+            raise serializers.ValidationError("Ano de fundação inválido.")
         return value
 
 class JogadorSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Jogador
+        model = Jogador
         fields = '__all__'
     
     def validate_idade(self, value):
@@ -32,17 +32,21 @@ class JogadorSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Idade do jogador inválida.')
         return value
         
-
 class JogoSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Jogo
+        model = Jogo
         fields = '__all__'
-    
+
     def validate(self, data):
         if data['equipa_casa'] == data['equipa_visitante']:
-            raise serializers.ValidationError('As equipas devem ser diferentes.')
-        
-        if data(data['equipa_casa'].liga != data['liga'] or data['equipa_visitante'] != data['liga']):
-            raise serializers.ValidationError('As equipas devem pertencer à mesma liga do jogo.')
-        
+            raise serializers.ValidationError("As equipas devem ser diferentes.")
+
+        if (
+            data['equipa_casa'].liga != data['liga']
+            or data['equipa_visitante'].liga != data['liga']
+        ):
+            raise serializers.ValidationError(
+                "As equipas devem pertencer à mesma liga do jogo."
+            )
+
         return data
