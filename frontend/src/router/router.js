@@ -14,13 +14,10 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
     { path: '/', component: () => import('@/views/Home.vue')},
-    { path: '/crud/ligas', component: () => import('@/views/LigasCrud.vue') },
     { path: '/equipas/:id', component: () => import('@/views/EquipaDetalhe.vue') },
     { path: '/jogador/:id', component: () => import('@/views/JogadorDetalhe.vue')},
     { path: '/crud', component: () => import('@/views/Gerenciar.vue')}
-    
 ]
-
 
 export default createRouter({
     history: createWebHistory(),

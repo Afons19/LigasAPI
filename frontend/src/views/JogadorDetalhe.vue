@@ -1,3 +1,30 @@
+<script>
+import api from '../services/api';
+
+export default {
+  data() {
+    return { 
+      jogador: {
+        nome: '',
+        posicao: '',
+        numero: '',
+        idade: '',
+        equipa_nome: '',
+      } 
+    };
+  },
+  async mounted() {
+    const id = this.$route.params.id;
+    try {
+      const res = await api.get(`jogadores/${id}/`);
+      this.jogador = res.data;
+    } catch (error) {
+      console.error('Erro ao carregar dados do jogador:', error);
+    }
+  },
+};
+</script>
+
 <template>
   <div class="jogador-detalhe-container">
     <!-- Cabeçalho com fundo gradiente -->
@@ -17,52 +44,7 @@
       </div>
     </div>
 
-    <!-- Conteúdo principal -->
     <div class="jogador-content">
-      <div class="stats-grid">
-        <!-- Card de informações básicas -->
-        <div class="info-card">
-          <div class="card-header">
-            <h3><i class="icon">👤</i> Informações Pessoais</h3>
-          </div>
-          <div class="card-body">
-            <div class="info-item">
-              <span class="label">Nome Completo</span>
-              <span class="value">{{ jogador.nome }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Idade</span>
-              <span class="value">{{ jogador.idade }} anos</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Número da Camisa</span>
-              <span class="value">{{ jogador.numero }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card de carreira -->
-        <div class="info-card">
-          <div class="card-header">
-            <h3><i class="icon">⚽</i> Carreira</h3>
-          </div>
-          <div class="card-body">
-            <div class="info-item">
-              <span class="label">Posição</span>
-              <span class="value badge posicao">{{ jogador.posicao }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Equipa</span>
-              <span class="value">{{ jogador.equipa_nome }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Status</span>
-              <span class="value status active">Ativo</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Botões de ação -->
       <div class="action-buttons">
         <button class="btn btn-secondary" @click="$router.back()">
@@ -73,44 +55,21 @@
   </div>
 </template>
 
-<script>
-import api from '../services/api';
-
-export default {
-  data() {
-    return { 
-      jogador: {
-        nome: '',
-        posicao: '',
-        numero: '',
-        idade: '',
-        equipa_nome: ''
-      } 
-    };
-  },
-  async mounted() {
-    const id = this.$route.params.id;
-    try {
-      const res = await api.get(`jogadores/${id}/`);
-      this.jogador = res.data;
-    } catch (error) {
-      console.error('Erro ao carregar dados do jogador:', error);
-    }
-  },
-};
-</script>
-
 <style scoped>
 .jogador-detalhe-container {
-  min-height: 100vh;
-  background: #f8fafc;
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Header com gradiente */
 .jogador-header {
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  background-color: #012a6c;
   color: white;
-  padding: 40px 20px;
+  padding: 200px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -133,7 +92,7 @@ export default {
 .jogador-numero {
   font-size: 4rem;
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.2);
+  color: #ffffff94;
   line-height: 1;
 }
 
@@ -178,7 +137,7 @@ export default {
   font-size: 1.5rem;
   font-weight: 600;
   color: white;
-  margin: 0;
+  margin-top: 60px;
   background: rgba(255, 255, 255, 0.1);
   padding: 10px 20px;
   border-radius: 10px;
@@ -188,92 +147,10 @@ export default {
 /* Conteúdo principal */
 .jogador-content {
   max-width: 1200px;
-  margin: -40px auto 0;
+  margin: -10px auto 0;
   padding: 0 20px 40px;
   position: relative;
   z-index: 1;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-  margin-bottom: 40px;
-}
-
-.info-card {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-}
-
-.card-header {
-  background: #f1f5f9;
-  padding: 20px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.card-header h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #1e293b;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.icon {
-  font-size: 1.2rem;
-}
-
-.card-body {
-  padding: 25px;
-}
-
-.info-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.info-item:last-child {
-  border-bottom: none;
-}
-
-.label {
-  color: #64748b;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-.value {
-  color: #1e293b;
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-
-.status.active {
-  color: #10b981;
-  font-weight: 600;
-}
-
-.stats-placeholder {
-  text-align: center;
-  padding: 20px 0;
-}
-
-.stats-placeholder p {
-  color: #64748b;
-  margin-bottom: 20px;
 }
 
 /* Botões */

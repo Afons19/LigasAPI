@@ -560,6 +560,19 @@ export default {
   color: white;
 }
 
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.btn-secondary {
+  background: white;
+  color: #475569;
+  border: 2px solid #cbd5e1;
+}
+
 .errors {
   background: #f8d7da;
   color: #721c24;
