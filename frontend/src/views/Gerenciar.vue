@@ -198,7 +198,7 @@ export default {
             </div>
             <div class="form-group">
               <label>Época:</label>
-              <input v-model="form.epoca" type="text" required/>
+              <input v-model="form.epoca" type="text" placeholder="202X/202X" required/>
             </div>
             <div class="form-group">
               <label>Data início:</label>
@@ -433,6 +433,11 @@ export default {
       <p v-if="!equipas.length && abaAtiva === 'equipas'" class="empty">Nenhuma equipa registada.</p>
       <p v-if="!jogadores.length && abaAtiva === 'jogadores'" class="empty">Nenhum jogador registado.</p>
       <p v-if="!jogos.length && abaAtiva === 'jogos'" class="empty">Nenhum jogo registado.</p>
+    </div>
+    <div class="action-buttons">
+        <button class="btn btn-secondary" @click="$router.back()">
+          <i class="icon">←</i> Voltar
+        </button>
     </div>
   </div>
 </template>

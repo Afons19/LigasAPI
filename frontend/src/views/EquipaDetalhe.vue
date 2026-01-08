@@ -4,22 +4,39 @@ import api from '../services/api';
 export default {
   data() {
     return {
+      liga: {},
       equipa: {},
       jogadores: [],
+      ligas: [],
     };
   },
   async mounted() {
     const id = this.$route.params.id;
 
-    // Buscar equipa
-    const equipaRes = await api.get(`equipas/${id}/`);
-    this.equipa = equipaRes.data;
+    try {
+      // Buscar equipa
+      const equipaRes = await api.get(`equipas/${id}/`);
+      this.equipa = equipaRes.data;
 
-    // Buscar apenas jogadores desta equipa
-    const jogadoresRes = await api.get('jogadores/');
-    this.jogadores = jogadoresRes.data.filter(
-      j => j.equipa === this.equipa.id
-    );
+      // Buscar todas as ligas para mapear o nome
+      const ligasRes = await api.get('ligas/');
+      this.ligas = ligasRes.data;
+
+      // Mapear o nome da liga
+      if (this.equipa.liga) {
+        this.liga = this.ligas.find(l => l.id === this.equipa.liga);
+      }
+
+      console.log('Equipa completo:', JSON.stringify(this.equipa, null, 2));
+
+      // Buscar apenas jogadores desta equipa
+      const jogadoresRes = await api.get('jogadores/');
+      this.jogadores = jogadoresRes.data.filter(
+        j => j.equipa === this.equipa.id
+      );
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+    }
   },
   methods: {
     verJogador(id) {
@@ -28,7 +45,6 @@ export default {
   },
 };
 </script>
-
 
 <template>
   <div class="container">
@@ -39,7 +55,7 @@ export default {
       <p><strong>Cidade:</strong> {{ equipa.cidade }}</p>
       <p><strong>Treinador:</strong> {{ equipa.treinador }}</p>
       <p><strong>Ano de fundação:</strong> {{ equipa.ano_fundacao }}</p>
-      <p><strong>Liga:</strong> {{ equipa.liga_nome }}</p>
+      <p><strong>Liga:</strong> {{ liga.nome }}</p>
     </div>
 
     <!-- Jogadores -->
