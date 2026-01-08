@@ -1,28 +1,41 @@
 <script>
+  import Navbar from './components/Navbar.vue';
   export default{
-    name: 'app'
+    name: 'app',
+    components: {
+      Navbar,
+    }
   }
 </script>
 
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Ligas</router-link> |
-      <router-link to="/equipas">Equipas</router-link> |
-      <router-link to="/jogadores">Jogadores</router-link> |
-      <router-link to="/jogos">Jogos</router-link> |
-    </nav>
-    <router-view />
+    <!-- <nav>
+      <h1>Gestão de Ligas de Futebol</h1>
+    </nav> -->
+    <navbar />
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
 <style>
-  nav {
-    padding: 10px;
-    background-color: lightcoral;
+
+  #app {
+    min-height: 100vh;
+    background-color: #f1f5f9;
   }
 
-  nav a {
-    margin-right: 10px;
+  nav {
+    padding: 20px;
+    background-color: #1e293b;
+    color: white;
+  }
+
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 </style>

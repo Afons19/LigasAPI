@@ -20,7 +20,7 @@ import api from '@/services/api';
         <h2>Jogadores</h2>
         <ul>
             <li v-for="jogador in jogadores" :key="jogador.id">
-                {{ jogador.nome }} - {{ jogador.equipa }}
+                {{ jogador.nome }} ({{ jogador.numero}}) - {{ jogador.posicao }} - {{ jogador.equipa_nome }}
             </li>
         </ul>
     </div>

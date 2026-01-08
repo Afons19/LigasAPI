@@ -23,6 +23,7 @@ class EquipaSerializer(serializers.ModelSerializer):
         return value
 
 class JogadorSerializer(serializers.ModelSerializer):
+    equipa_nome = serializers.CharField(source='equipa.nome', read_only=True)
     class Meta:
         model = Jogador
         fields = '__all__'
