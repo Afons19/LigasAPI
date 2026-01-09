@@ -17,7 +17,7 @@ export default {
     <h1>Gestão de Ligas de Futebol</h1>
     <div class="links">
       <router-link to="/">Início</router-link>
-      <router-link to="/crud">Gerenciar</router-link>
+      <router-link to="/gerenciar">Gerenciar</router-link>
     </div>
   </nav>
 </template>

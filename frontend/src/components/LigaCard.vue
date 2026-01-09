@@ -1,5 +1,5 @@
 <script>
-import api from '../services/api';
+  import api from '@/services/api';
 
 export default {
   name: 'LigaCard',
@@ -15,29 +15,38 @@ export default {
     };
   },
   async mounted() {
-    const res = await api.get('jogos/');
-    this.jogos = res.data.filter(j => j.liga === this.liga.id);
+    try {
+      const res = await api.get('jogos/');
+      this.jogos = res.data.filter(
+        jogo => jogo.liga === this.liga.id
+      );
+      
+      // console.log('Jogos:', JSON.stringify(this.jogos, null, 2));
+    } catch (e) {
+      console.error('Erro ao carregar jogos', e);
+    }
   },
 };
 </script>
 
+
 <template>
   <div class="liga-card">
-    <h3>{{ liga.nome }} ({{ liga.epoca }})</h3>
-    <p class="pais">{{ liga.pais }}</p>
+    <h3>{{ liga.nome }}</h3>
 
     <ul v-if="jogos.length">
       <li v-for="jogo in jogos" :key="jogo.id">
         {{ jogo.equipa_casa_nome }}
         {{ jogo.golos_casa }} -
-        {{ jogo.golos_visitante }}
+        {{ jogo.golos_fora }}
         {{ jogo.equipa_visitante_nome }}
       </li>
     </ul>
 
-    <p v-else class="empty">Sem jogos registados</p>
+    <p v-else>Sem jogos registados</p>
   </div>
 </template>
+
 
 <style scoped>
 .liga-card {

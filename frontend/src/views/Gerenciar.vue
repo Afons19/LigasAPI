@@ -344,7 +344,7 @@ export default {
             <td>{{ item.data_fim }}</td>
             <td>
               <button @click="abrirForm(item)" class="btn-edit">Editar</button>
-              <button @click="deletar(item.id)" class="btn-delete">Deletar</button>
+              <button @click="deletar(item.id)" class="btn-delete">Remover</button>
             </td>
           </tr>
         </tbody>
@@ -371,7 +371,7 @@ export default {
             <td>{{ item.liga_nome }}</td>
             <td>
               <button @click="abrirForm(item)" class="btn-edit">Editar</button>
-              <button @click="deletar(item.id)" class="btn-delete">Deletar</button>
+              <button @click="deletar(item.id)" class="btn-delete">Remover</button>
             </td>
           </tr>
         </tbody>
@@ -398,7 +398,7 @@ export default {
             <td>{{ item.equipa_nome }}</td>
             <td>
               <button @click="abrirForm(item)" class="btn-edit">Editar</button>
-              <button @click="deletar(item.id)" class="btn-delete">Deletar</button>
+              <button @click="deletar(item.id)" class="btn-delete">Remover</button>
             </td>
           </tr>
         </tbody>
@@ -423,7 +423,7 @@ export default {
             <td>{{ item.data }}</td>
             <td>
               <button @click="abrirForm(item)" class="btn-edit">Editar</button>
-              <button @click="deletar(item.id)" class="btn-delete">Deletar</button>
+              <button @click="deletar(item.id)" class="btn-delete">Remover</button>
             </td>
           </tr>
         </tbody>
@@ -537,11 +537,17 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
+  font-weight: bolder;
 }
 
 .btn-primary {
-  background: #007bff;
+  background: #011d4a;
   color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0543a7;
+  transition: .5s ease;
 }
 
 .btn-secondary {
@@ -550,14 +556,16 @@ export default {
 }
 
 .btn-edit {
-  background: #28a745;
+  background: #009924;
   color: white;
-  margin: 0px 10px;     
+  margin: 0px 10px;   
 }
 
-.btn-delete {
-  background: #dc3545;
-  color: white;
+.btn-delete:hover {
+  /* border: #d80016 29px; */
+  /* background: #d80016; */
+  transition: .5s ease;
+  color: rgb(201, 0, 0);
 }
 
 .action-buttons {
