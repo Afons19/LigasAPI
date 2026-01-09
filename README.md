@@ -319,7 +319,6 @@ Sinta-se à vontade para contribuir com melhorias abrindo um problema ou enviand
 
 Este projeto é licenciado sob a **Licença MIT**. Consulte o ficheiro LICENSE para mais detalhes.
 
-<<<<<<< HEAD
 ---
 
 # LigasAPI Project Documentation
