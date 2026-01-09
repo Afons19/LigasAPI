@@ -25,7 +25,7 @@ class EquipaViewSet(viewsets.ModelViewSet):
     serializer_class = EquipaSerializer
     permission_classes = [permissions.AllowAny]
 
-@api_view(['GET'])
+@api_view(['GET']) # permite filtrar uma determinada liga de acordo com o id
 def equipas_por_liga(request, liga_id):
     equipas = Equipa.objects.filter(liga_id=liga_id)
     serializer = EquipaSerializer(equipas, many=True)
