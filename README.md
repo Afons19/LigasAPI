@@ -321,7 +321,7 @@ Este projeto é licenciado sob a **Licença MIT**. Consulte o ficheiro LICENSE p
 
 ---
 
-# LigasAPI Project Documentation
+# (EN)LigasAPI Project Documentation
 ---
 
 # LigasAPI - Complete Sports League Management System (Football)
