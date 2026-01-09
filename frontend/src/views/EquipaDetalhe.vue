@@ -152,7 +152,7 @@ body {
   background: linear-gradient(135deg, #012a6c 50%, #123d81 40%);
   color: white;
   padding: 40px;
-  border-radius: 16px;
+  border-radius: 10px;
   margin-bottom: 30px;
   position: relative;
   overflow: hidden;
@@ -168,6 +168,7 @@ body {
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" opacity="0.1"><path d="M0,0 L100,0 L100,100 Z" fill="white"/></svg>');
   background-size: cover;
 }
+
 
 .equipa-header h1 {
   font-size: 2.5rem;

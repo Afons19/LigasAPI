@@ -4,7 +4,8 @@ from .views import (
     LigaViewSet,
     EquipaViewSet,
     JogadorViewSet,
-    JogoViewSet
+    JogoViewSet,
+    equipas_por_liga
 )
 
 router = DefaultRouter()
@@ -14,5 +15,6 @@ router.register(r'jogadores', JogadorViewSet)
 router.register(r'jogos', JogoViewSet)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('ligas/<int:liga_id>/equipas/', equipas_por_liga)
 ]

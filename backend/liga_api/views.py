@@ -1,4 +1,6 @@
 from rest_framework import viewsets, permissions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .models import (
     Liga, 
     Equipa,
@@ -23,6 +25,12 @@ class EquipaViewSet(viewsets.ModelViewSet):
     serializer_class = EquipaSerializer
     permission_classes = [permissions.AllowAny]
 
+@api_view(['GET'])
+def equipas_por_liga(request, liga_id):
+    equipas = Equipa.objects.filter(liga_id=liga_id)
+    serializer = EquipaSerializer(equipas, many=True)
+    return Response(serializer.data)
+    
 class JogadorViewSet(viewsets.ModelViewSet):
     queryset = Jogador.objects.all()
     serializer_class = JogadorSerializer
@@ -32,3 +40,4 @@ class JogoViewSet(viewsets.ModelViewSet):
     queryset = Jogo.objects.all()
     serializer_class = JogoSerializer
     permission_classes = [permissions.AllowAny]
+

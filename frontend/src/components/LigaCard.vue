@@ -32,7 +32,13 @@ export default {
 
 <template>
   <div class="liga-card">
-    <h3>{{ liga.nome }}</h3>
+    
+    <!-- Título agora é um link -->
+    <router-link
+      :to="`/ligas/${liga.id}`"
+      class="liga-link">
+      <h3>{{ liga.nome }}</h3>
+    </router-link>
 
     <ul v-if="jogos.length">
       <li v-for="jogo in jogos" :key="jogo.id">
@@ -79,4 +85,18 @@ li {
   font-style: italic;
   color: #94a3b8;
 }
+
+.liga-link {
+  text-decoration: none;
+}
+
+.liga-link h3 {
+  transition: 0.2s;
+}
+
+.liga-link:hover h3 {
+  color: #0539a7;
+  text-decoration: underline;
+}
+
 </style>
