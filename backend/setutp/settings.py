@@ -60,7 +60,21 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = {
+    'http://localhost:5173/',
+    'https://ligasapi.onrender.com',
+}
+
+CORS_ALLOW_HEADERS = [
+    "authorization",
+    "content-type",
+]
+
+
 CORS_ALLOW_ALL_ORIGINS = True
+
+
 
 ROOT_URLCONF = 'setutp.urls'
 
