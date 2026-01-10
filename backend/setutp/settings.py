@@ -34,7 +34,7 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-        "DEFAULT_AUTHENTICATION_CLASSES": (
+    "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": (
@@ -60,11 +60,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CORS_ALLOW_ALL_ORIGINS = {
-    'http://localhost:5173/',
-    'https://ligasapi.onrender.com',
-}
 
 CORS_ALLOW_HEADERS = [
     "authorization",

@@ -18,12 +18,12 @@ from .serializer import (
 class LigaViewSet(viewsets.ModelViewSet):
     queryset = Liga.objects.all()
     serializer_class = LigaSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class EquipaViewSet(viewsets.ModelViewSet):
     queryset = Equipa.objects.all()
     serializer_class = EquipaSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 @api_view(['GET']) # permite filtrar uma determinada liga de acordo com o id
 def equipas_por_liga(request, liga_id):
@@ -34,10 +34,10 @@ def equipas_por_liga(request, liga_id):
 class JogadorViewSet(viewsets.ModelViewSet):
     queryset = Jogador.objects.all()
     serializer_class = JogadorSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class JogoViewSet(viewsets.ModelViewSet):
     queryset = Jogo.objects.all()
     serializer_class = JogoSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
