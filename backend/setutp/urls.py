@@ -1,12 +1,5 @@
 from django.urls import path, include
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
 urlpatterns = [
     path('api/', include('liga_api.urls')),
-
-    path('api/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token', TokenRefreshView.as_view(), name='token_refresh'),
 ]
