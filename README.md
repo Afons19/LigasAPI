@@ -1,8 +1,9 @@
 # Documentação do Projeto LigasAPI
 ---
 
-# LigasAPI - Sistema Completo de Gestão de Ligas Desportivas (Futebol)
+#  LigasAPI - Sistema de Gestão de Ligas Desportivas(Futebol)
 
+Este projeto consiste numa **API REST** e num **frontend web** para a gestão de ligas desportivas, equipas, jogadores e jogos, permitindo realizar operações CRUD completas através de uma interface gráfica.
 **Ano letivo: 2025/2026**
 
 ![Django](https://img.shields.io/badge/Django-4.x-092E20)
@@ -13,308 +14,155 @@
 ![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-Sistema completo para gestão de ligas desportivas de futebol, composto por **backend API REST** em Django e **frontend** em Vue.js 3.
+---
+
+## Tecnologias
+
+### Backend
+
+* Python 3
+* Django
+* Django REST Framework
+* SQLite
+* python-decouple
+* dj-database-url
+* Gunicorn
+
+### Frontend
+
+* Vue.js 3
+* Vite
+* Axios
+* CSS
+
+### Hospedagem
+
+* **Backend**: Render
+* **Frontend**: Render
 
 ---
 
-## 1. 📌 Visão Geral
+## Funcionalidades
 
 ### Backend (API REST)
-- Desenvolvido com **Django REST Framework**
-- Fornece endpoints REST para gestão completa de ligas, equipas, jogadores e jogos
-- Base de dados SQLite com relacionamentos bem definidos
 
-### Frontend (Interface Web)
-- Construído com **Vue.js 3** e **Vite**
-- Consome a API REST do backend
-- Interface intuitiva para visualização e gestão de dados
+* **Gerir Ligas**
+* **Gerir Equipas**
+* **Gerir Jogadores**
+* **Gerir Jogos**
+* Relacionamentos entre entidades:
 
----
+  * Liga → Equipas
+  * Equipa → Jogadores
+  * Liga → Jogos
 
-## 2. 🏗️ Arquitetura do Sistema
+### Frontend
 
-```
-Sistema LigasAPI/
-├── 📁 backend/          # API REST Django
-│   ├── 📁 backend/
-│   ├── 📁 liga_api/
-│   ├── manage.py
-│   └── requirements.txt
-│
-└── 📁 frontend/         # Interface Vue.js
-    └── 📁 src/
-        ├── 📁 components/
-        ├── 📁 router/
-        ├── 📁 services/
-        └── 📁 views/
-```
+* Visualização de ligas, equipas, jogadores e jogos
+* CRUD completo através da interface gráfica
+* Página inicial com estatísticas gerais
+* Página de detalhes de equipas e jogadores
+* Navegação por navbar
 
 ---
 
-## 3. 📊 Backend - Modelos de Dados
+## Endpoints da API
 
-### Liga
-- nome
-- pais
-- epoca
+### Ligas
 
-### Equipa
-- nome
-- cidade
-- treinador
-- ano_fundacao
-- liga (FK)
+| Verbo HTTP | Caminho          | Descrição       |
+| ---------- | ---------------- | --------------- |
+| POST       | /api/ligas/      | Criar liga      |
+| GET        | /api/ligas/      | Listar ligas    |
+| GET        | /api/ligas/{id}/ | Visualizar liga |
+| PUT        | /api/ligas/{id}/ | Atualizar liga  |
+| DELETE     | /api/ligas/{id}/ | Remover liga    |
 
-### Jogador
-- nome
-- posicao
-- numero
-- idade
-- equipa (FK)
+### Equipas
 
-### Jogo
-- data
-- golos_casa
-- golos_fora
-- liga (FK)
-- equipa_casa (FK)
-- equipa_visitante (FK)
+| Verbo HTTP | Caminho            | Descrição         |
+| ---------- | ------------------ | ----------------- |
+| POST       | /api/equipas/      | Criar equipa      |
+| GET        | /api/equipas/      | Listar equipas    |
+| GET        | /api/equipas/{id}/ | Visualizar equipa |
+| PUT        | /api/equipas/{id}/ | Atualizar equipa  |
+| DELETE     | /api/equipas/{id}/ | Remover equipa    |
 
----
+### Jogadores
 
-## 4. 🧩 Diagrama Entidade-Relacionamento (ER)
+| Verbo HTTP | Caminho              | Descrição          |
+| ---------- | -------------------- | ------------------ |
+| POST       | /api/jogadores/      | Criar jogador      |
+| GET        | /api/jogadores/      | Listar jogadores   |
+| GET        | /api/jogadores/{id}/ | Visualizar jogador |
+| PUT        | /api/jogadores/{id}/ | Atualizar jogador  |
+| DELETE     | /api/jogadores/{id}/ | Remover jogador    |
 
-O diagrama abaixo representa os relacionamentos entre as entidades do sistema:
+### Jogos
 
-- Uma **Liga** possui várias **Equipas**
-- Uma **Liga** possui vários **Jogos**
-- Uma **Equipa** possui vários **Jogadores**
-- Um **Jogo** envolve duas **Equipas** (casa e visitante)
-
-### Diagrama Visual
-
-```
-┌──────────┐        1       N        ┌──────────┐
-│  Liga    │────────────────────────▶│  Equipa  │
-│──────────│                         │──────────│
-│ id       │                         │ id       │
-│ nome     │                         │ nome     │
-│ pais     │                         │ cidade   │
-│ epoca    │                         │ treinador│
-└──────────┘                         │ ano_fund │
-      │                              │ liga_id  │
-      │                              └──────────┘
-      │ 1
-      │
-      │ N
-┌──────────┐        1       N        ┌──────────┐
-│  Liga    │────────────────────────▶│  Jogo    │
-│──────────│                         │──────────│
-│ id       │                         │ id       │
-│ nome     │                         │ data     │
-└──────────┘                         │ golos_c  │
-                                     │ golos_f  │
-                                     │ liga_id  │
-                                     │ equipa_c │
-                                     │ equipa_v │
-                                     └──────────┘
-
-┌──────────┐        1       N        ┌──────────┐
-│  Equipa  │────────────────────────▶│ Jogador  │
-│──────────│                         │──────────│
-│ id       │                         │ id       │
-│ nome     │                         │ nome     │
-└──────────┘                         │ posicao  │
-                                     │ numero   │
-                                     │ idade    │
-                                     │ equipa_id│
-                                     └──────────┘
-```
-
-### Resumo dos Relacionamentos
-
-| Entidade Origem | Relação | Entidade Destino |
-| --------------- | ------- | ---------------- |
-| Liga            | 1 : N   | Equipa           |
-| Liga            | 1 : N   | Jogo             |
-| Equipa          | 1 : N   | Jogador          |
-| Equipa          | 1 : N   | Jogo (casa)      |
-| Equipa          | 1 : N   | Jogo (visitante) |
+| Verbo HTTP | Caminho          | Descrição       |
+| ---------- | ---------------- | --------------- |
+| POST       | /api/jogos/      | Criar jogo      |
+| GET        | /api/jogos/      | Listar jogos    |
+| GET        | /api/jogos/{id}/ | Visualizar jogo |
+| PUT        | /api/jogos/{id}/ | Atualizar jogo  |
+| DELETE     | /api/jogos/{id}/ | Remover jogo    |
 
 ---
 
-## 5. 🔗 Backend - Endpoints da API
+## Aplicação Online
 
-**URL Base:** `http://127.0.0.1:8000/api/`
+* **API REST (Backend)**
+  [https://ligasapi.onrender.com/api/](https://ligasapi.onrender.com/api/)
 
-| Entidade   | Endpoint           | Métodos              |
-|------------|--------------------|----------------------|
-| Ligas      | `/ligas/`          | GET, POST            |
-|            | `/ligas/{id}/`     | GET, PUT, DELETE     |
-| Equipas    | `/equipas/`        | GET, POST            |
-|            | `/equipas/{id}/`   | GET, PUT, DELETE     |
-| Jogadores  | `/jogadores/`      | GET, POST            |
-|            | `/jogadores/{id}/` | GET, PUT, DELETE     |
-| Jogos      | `/jogos/`          | GET, POST            |
-|            | `/jogos/{id}/`     | GET, PUT, DELETE     |
+* **Frontend Web**
+  [https://ligasapi-site.onrender.com/](https://ligasapi-site.onrender.com/)
 
+PS: se os dados não forem exibidos após acessar o site é porque a API está inativa.
 ---
 
-## 6. 🎨 Frontend - Estrutura do Projeto
+## Configuração Local
 
-```
-frontend/
-└── src/
-    ├── assets/
-    │   └── style.css          # Estilos globais
-    ├── componentes/
-    │   ├── Navbar.vue         # Navegação global
-    │   ├── StatCard.vue       # Estatísticas
-    │   └── LigaCard.vue       # Card de liga
-    ├── router/
-    │   └── router.js          # Gestão de rotas
-    ├── services/
-    │   └── api.js             # Comunicação com API
-    └── views/
-        ├── Home.vue           # Página inicial
-        ├── Gerenciar.vue      # Gestão CRUD
-        ├── LigaDetalhe.vue    # Detalhes da liga
-        ├── EquipaDetalhe.vue  # Detalhes da equipa
-        └── JogadorDetalhe.vue # Detalhes do jogador
-```
-
----
-
-## 7. 🖥️ Frontend - Views (Páginas)
-
-### Home.vue
-- Estatísticas globais do sistema
-- Listagem de ligas, jogos e equipas
-- Navegação rápida para detalhes
-
-### Gerenciar.vue
-- Interface completa de CRUD para todas as entidades
-- Criação, edição e eliminação de dados
-
-### Páginas de Detalhe
-- Visualização detalhada de cada entidade
-- Informações relacionadas e contexto
-
----
-
-## 8. ⚙️ Instalação e Execução
-
-### Passo 1: Clonar o Repositório Principal
+### Backend
 
 ```bash
-# Clone o repositório principal (contém backend e frontend)
 git clone https://github.com/Afons19/LigasAPI.git
-cd LigasAPI
-```
-
-### Passo 2: Configurar e Executar o Backend
-
-```bash
-# Aceder ao diretório do backend
-cd backend
-
-# Criar ambiente virtual
-python -m venv venv
-
-# Ativar ambiente (Windows)
-venv\Scripts\activate
-
-# Ativar ambiente (Linux/macOS)
-source venv/bin/activate
-
-# Instalar dependências
+cd LigasAPI/backend
+python -m venv .venv
+Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-
-# Executar migrações da base de dados
 python manage.py migrate
-
-# Iniciar servidor de desenvolvimento
 python manage.py runserver
 ```
 
-O backend estará disponível em: `http://127.0.0.1:8000`
+A API ficará disponível em:
 
-### Passo 3: Configurar e Executar o Frontend
+```
+http://127.0.0.1:8000/api/
+```
+
+---
+
+### Frontend
 
 ```bash
-# Abrir novo terminal
-# Voltar ao diretório raiz do projeto
-cd LigasAPI
-
-# Aceder ao diretório do frontend
 cd frontend
-
-# Instalar dependências
 npm install
-
-# Iniciar servidor de desenvolvimento
 npm run dev
 ```
 
-O frontend estará disponível em: `http://localhost:5173`
 ---
 
-## 9. 🌐 URLs de Acesso
+## Observações
 
-- **Backend API:** `http://127.0.0.1:8000/api/`
-- **Frontend:** `http://localhost:5173`
-
----
-
-## 10. 🛠️ Tecnologias Utilizadas
-
-### Backend
-- Python 3.10+
-- Django 4.x
-- Django REST Framework
-- SQLite 3
-- django-cors-headers
-- python-decouple
-- dj-database-url
-
-### Frontend
-- Vue.js 3
-- Vite
-- Vue Router
-- Axios
-- CSS
+* A API não utiliza autenticação.
+* Todos os métodos HTTP estão disponíveis.
+* O backend utiliza SQLite.
+* Os dados podem ser reiniciados em hospedagem gratuita.
+* Projeto desenvolvido para fins académicos.
 
 ---
 
-## 11. ✅ Funcionalidades Implementadas
+## Licença
 
-### Backend
-- [x] API REST completa
-- [x] CRUD para todas as entidades
-- [x] Relacionamentos bem definidos
-- [x] Serializers otimizados
-- [x] CORS configurado
-
-### Frontend
-- [x] Interface responsiva
-- [x] Consumo da API REST
-- [x] Navegação por rotas
-- [x] Componentes reutilizáveis
-- [x] Gestão completa de dados
-
----
-
-## 🎓 Projeto Académico
-
-Este projeto foi desenvolvido para fins académicos.
-
----
-
-## 🤝 Contribuição
-
-Sinta-se à vontade para contribuir com melhorias abrindo um problema ou enviando um pull request.
----
-
-## 📄 Licença
-
-Este projeto é licenciado sob a **Licença MIT**. Consulte o ficheiro LICENSE para mais detalhes.
+Este projeto é licenciado sob a Licença MIT.
