@@ -6,11 +6,29 @@ class LigaSerializer(serializers.ModelSerializer):
         model = Liga
         fields = '__all__'
 
-    def clean(self, data):
-        if self.data['data_fim'] < self.data['data_inicio']:
-            raise serializers.ValidationError('A data do fim de torneio não pode ser anterior à data de início.')
+    def validate(self, data):
+        """
+        Validação completa dos dados
+        """
+        
+        if 'data_fim' in data and 'data_inicio' in data:
+            if data['data_fim'] < data['data_inicio']:
+                raise serializers.ValidationError({
+                    'data_fim':'A data do fim não pode ser anterior à data de início.'
+                })
+        
         return data
-
+    
+    def validate_nome(self, value):
+        """Validação do nome"""
+        if len(value) < 3:
+            raise serializers.ValidationError('O nome deve ter pelo menos 3 caracteres.')
+        
+        liga_id = self.instance.id if self.instance else None
+        if Liga.objects.filter(nome=value, epoca=self.initial_data.get('epoca')).exclude(id=liga_id).exists():
+            raise serializers.ValidationError('Já existe uma liga com este nome nesta época.')
+        
+        return value
 
 class EquipaSerializer(serializers.ModelSerializer):
     class Meta:
