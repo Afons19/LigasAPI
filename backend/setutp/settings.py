@@ -55,10 +55,7 @@ CORS_ALLOW_HEADERS = [
     "content-type",
 ]
 
-
 CORS_ALLOW_ALL_ORIGINS = True
-
-
 
 ROOT_URLCONF = 'setutp.urls'
 
@@ -78,7 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'setutp.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -108,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
