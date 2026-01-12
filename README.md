@@ -162,7 +162,13 @@ npm run dev
 * Projeto desenvolvido para fins académicos.
 
 ---
+## Observação sobre Persistência de Dados
 
+A aplicação utiliza SQLite como base de dados. Em ambiente de produção (Render), os dados não são persistentes após reinícios do serviço ou novos deploys.
+
+Esta decisão foi tomada de forma intencional, uma vez que a API é pública e não possui autenticação, evitando assim a persistência de dados indevidos ou inconsistentes inseridos por utilizadores externos. Desta forma, garante-se um ambiente limpo para testes e demonstração das funcionalidades.
+
+---
 ## Licença
 
 Este projeto é licenciado sob a Licença MIT.
