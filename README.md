@@ -113,10 +113,10 @@ Este projeto consiste numa **API REST** e num **frontend web** para a gestão de
 ## Aplicação Online
 
 * **API REST (Backend)**
-  [https://ligasapi.onrender.com/api/](https://ligasapi.onrender.com/api/)
+  [https://ligasapi.onrender.com/api/](https://ligas-api.onrender.com/api/)
 
 * **Frontend Web**
-  [https://ligasapi-site.onrender.com/](https://ligasapi-site.onrender.com/)
+  [https://ligasapi-site.onrender.com/](https://ligas-site.onrender.com/)
 
 PS: se os dados não forem exibidos após acessar o site é porque a API está inativa.
 ---
